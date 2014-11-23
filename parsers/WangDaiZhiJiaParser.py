@@ -17,7 +17,7 @@ class WangDaiZhiJiaParser(object):
 
         result = []
         all_fingerprint = Storage.query_all_fingerprint(self.config['name'])
-
+        has_duplicate = False
         url_list = [self.config['url'], ]
         while len(url_list):
             time.sleep(2)
@@ -34,6 +34,7 @@ class WangDaiZhiJiaParser(object):
                 qa_href = target_title_ele.attr.href
                 this_fingerprint = gen_fingerprint(qa_href)
                 if this_fingerprint in all_fingerprint:
+                    has_duplicate = True
                     # 一旦出现重复，就没必要继续了
                     break
                 one_result = {
@@ -46,6 +47,9 @@ class WangDaiZhiJiaParser(object):
                 all_fingerprint[this_fingerprint] = all_fingerprint.get(this_fingerprint, 0) + 1
                 print one_result
                 result.append(one_result)
+
+            if has_duplicate:
+                break
             maybe_next_page = target_ele.find('.pages').find('a').filter('.n')
             for np in maybe_next_page:
                 pq_np = pq(np)

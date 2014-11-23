@@ -11,13 +11,6 @@ from sqlalchemy import Column, Integer, String, DateTime, create_engine
 from sqlalchemy.orm import sessionmaker
 
 
-def fetch_page(url):
-    r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/38.0.2125.111 Chrome/38.0.2125.111 Safari/537.36'})
-    if r.status_code != 200:
-        return False
-    return r.text
-
-
 class Record(Base):
     __tablename__ = 'records'
 
@@ -60,3 +53,10 @@ def gen_fingerprint(raw_string):
     md5_it = hashlib.md5()
     md5_it.update(raw_string)
     return md5_it.hexdigest()
+
+
+def fetch_page(url):
+    r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/38.0.2125.111 Chrome/38.0.2125.111 Safari/537.36'})
+    if r.status_code != 200:
+        return False
+    return r.text
