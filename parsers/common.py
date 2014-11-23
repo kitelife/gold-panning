@@ -12,7 +12,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 def fetch_page(url):
-    r = requests.get(url)
+    r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/38.0.2125.111 Chrome/38.0.2125.111 Safari/537.36'})
     if r.status_code != 200:
         return False
     return r.text

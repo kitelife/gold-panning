@@ -1,3 +1,5 @@
+# coding: utf-8
+
 __author__ = 'xiayf'
 
 import time
@@ -18,8 +20,8 @@ class WangDaiZhiJiaParser(object):
 
         url_list = [self.config['url'], ]
         while len(url_list):
-            time.sleep(1)
-            content = fetch_page(url_list.pop(len(url_list) - 1))
+            time.sleep(2)
+            content = fetch_page(url_list.pop())
             if content is False:
                 print 'Failed to fetch target page'
                 return False
@@ -43,9 +45,12 @@ class WangDaiZhiJiaParser(object):
                 all_fingerprint[this_fingerprint] = all_fingerprint.get(this_fingerprint, 0) + 1
                 print one_result
                 result.append(one_result)
-            next_page = target_ele.find('.pages').find('a').filter('.n').eq(0)
-            if len(next_page):
-                url_list.append(next_page.attr.href)
+            maybe_next_page = target_ele.find('.pages').find('a').filter('.n')
+            for np in maybe_next_page:
+                pq_np = pq(np)
+                if pq_np.text() == u'下一页':
+                    url_list.append(pq_np.attr.href)
+                    print url_list
 
         return result
 
