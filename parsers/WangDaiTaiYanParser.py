@@ -55,7 +55,7 @@ class WangDaiTianYanParser(ParserBase):
                 last_page_num = int(last_page_href.split('/')[-1])
             if next_page_num < last_page_num-1:
                 next_page_num += 1
-                self.url_list.append('http://www.p2peye.com/ask/a2/' + str(next_page_num))
+                self.url_list.append(self.config['url'] + str(next_page_num))
                 print self.url_list
         return result
 
