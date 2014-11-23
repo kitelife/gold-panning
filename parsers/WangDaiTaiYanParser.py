@@ -31,8 +31,7 @@ class WangDaiTianYanParser(ParserBase):
             for qa_tr in target_qa_trs:
                 pq_qa = pq(qa_tr)
                 target_qa_item = pq_qa.find('.titlee').find('a.lnk')
-                qa_href = target_qa_item.attr.href
-                print qa_href
+                qa_href = 'http://www.p2peye.com/' + target_qa_item.attr.href
                 this_fingerprint = gen_fingerprint(qa_href)
                 if this_fingerprint in self.all_fingerprint:
                     self.has_duplicate = True

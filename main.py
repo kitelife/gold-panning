@@ -16,6 +16,11 @@ CONFIGS = [
         'name': u'网贷天眼 - 已解决问题',
         'url': 'http://www.p2peye.com/ask/a2/',
         'parser': WangDaiTianYanParser,
+    },
+    {
+        'name': u'网贷天眼 - 待解决问题',
+        'url': 'http://www.p2peye.com/ask/a1/',
+        'parser': WangDaiTianYanParser,
     }
 ]
 
