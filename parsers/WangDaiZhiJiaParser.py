@@ -4,7 +4,7 @@ import time
 
 from pyquery import PyQuery as pq
 
-from common import fetch_page
+from common import fetch_page, Storage, gen_fingerprint
 
 
 class WangDaiZhiJiaParser(object):
@@ -14,9 +14,12 @@ class WangDaiZhiJiaParser(object):
     def __parse(self):
 
         result = []
+        all_fingerprint = Storage.query_all_fingerprint(self.config['name'])
 
-        def inner_parser(url):
-            content = fetch_page(url)
+        url_list = [self.config['url'], ]
+        while len(url_list):
+            time.sleep(1)
+            content = fetch_page(url_list.pop(len(url_list) - 1))
             if content is False:
                 print 'Failed to fetch target page'
                 return False
@@ -24,26 +27,28 @@ class WangDaiZhiJiaParser(object):
             target_ele = dom_pq.find('#mod-answer-list')
             qa_list = target_ele.find('.bd').find('.cls-qa-table').find('table').find('tbody').find('tr').filter(lambda i: i > 0)
             for one_qa in qa_list:
-                one_result = {}
                 pq_qa = pq(one_qa)
                 target_title_ele = pq_qa.children('td.title').find('.wrap').children('a')
-                one_result['href'] = target_title_ele.attr.href
-                one_result['title'] = target_title_ele.attr.title
-                one_result['created_time'] = pq_qa.children('td').eq(2).text()
+                qa_href = target_title_ele.attr.href
+                this_fingerprint = gen_fingerprint(qa_href)
+                if this_fingerprint in all_fingerprint:
+                    continue
+                one_result = {
+                    'name': self.config['name'],
+                    'title': target_title_ele.attr.title,
+                    'url': qa_href,
+                    'fingerprint': this_fingerprint,
+                    'created_time': pq_qa.children('td').eq(2).text()
+                }
+                all_fingerprint[this_fingerprint] = all_fingerprint.get(this_fingerprint, 0) + 1
                 print one_result
                 result.append(one_result)
             next_page = target_ele.find('.pages').find('a').filter('.n').eq(0)
             if len(next_page):
-                time.sleep(1)
-                inner_parser(next_page.attr.href)
-
-        inner_parser(self.config['url'])
+                url_list.append(next_page.attr.href)
 
         return result
 
-    def __store(self, results):
-        pass
-
     def run(self):
         results = self.__parse()
-        self.__store(results)
+        Storage.add(results)

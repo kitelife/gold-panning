@@ -2,6 +2,8 @@
 
 __author__ = 'xiayf'
 
+import sys
+
 import multiprocessing
 
 from parsers import *
