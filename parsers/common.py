@@ -49,6 +49,15 @@ class Storage(object):
         return all_fingerprint
 
 
+class ParserBase(object):
+
+    def __init__(self, config):
+        self.config = config
+        self.all_fingerprint = Storage.query_all_fingerprint(self.config['name'])
+        self.has_duplicate = False
+        self.url_list = [self.config['url'], ]
+
+
 def gen_fingerprint(raw_string):
     md5_it = hashlib.md5()
     md5_it.update(raw_string)

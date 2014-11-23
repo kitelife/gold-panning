@@ -2,8 +2,6 @@
 
 __author__ = 'xiayf'
 
-import sys
-
 import multiprocessing
 
 from parsers import *
@@ -14,6 +12,11 @@ CONFIGS = [
         'url': 'http://www.wangdaizhijia.com/wenda/c-all/all/',
         'parser': WangDaiZhiJiaParser,
     },
+    {
+        'name': u'网贷天眼 - 已解决问题',
+        'url': 'http://www.p2peye.com/ask/a2/',
+        'parser': WangDaiTianYanParser,
+    }
 ]
 
 
