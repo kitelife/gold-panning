@@ -3,8 +3,8 @@ __author__ = 'xiayf'
 import hashlib
 
 import requests
-from sqlalchemy.ext.declarative import declarative_base
 
+from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 from sqlalchemy import Column, Integer, String, DateTime, create_engine
@@ -59,4 +59,4 @@ class Storage(object):
 def gen_fingerprint(raw_string):
     md5_it = hashlib.md5()
     md5_it.update(raw_string)
-    return md5_it.digest()
+    return md5_it.hexdigest()
