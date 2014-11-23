@@ -34,7 +34,8 @@ class WangDaiZhiJiaParser(object):
                 qa_href = target_title_ele.attr.href
                 this_fingerprint = gen_fingerprint(qa_href)
                 if this_fingerprint in all_fingerprint:
-                    continue
+                    # 一旦出现重复，就没必要继续了
+                    break
                 one_result = {
                     'name': self.config['name'],
                     'title': target_title_ele.attr.title,
