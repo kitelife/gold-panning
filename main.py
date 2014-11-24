@@ -21,6 +21,11 @@ CONFIGS = [
         'name': u'网贷天眼 - 待解决问题',
         'url': 'http://www.p2peye.com/ask/a1/',
         'parser': WangDaiTianYanParser,
+    },
+    {
+        'name': u'积木盒子 - 理财心得 - 投资心得',
+        'url': 'http://bbs.jimubox.com/thread-12?type=22&orderby=postdate',
+        'parser': JiMuBoxParser,
     }
 ]
 

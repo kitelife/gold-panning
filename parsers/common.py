@@ -57,9 +57,11 @@ class ParserBase(object):
         self.has_duplicate = False
         self.url_list = [self.config['url'], ]
 
+    def __parse(self):
+        pass
+
     def run(self):
-        result = self.__parse()
-        Storage.add(result)
+        pass
 
 
 def gen_fingerprint(raw_string):

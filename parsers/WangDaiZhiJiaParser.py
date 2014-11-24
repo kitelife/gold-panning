@@ -6,10 +6,11 @@ import time
 
 from pyquery import PyQuery as pq
 
-from common import fetch_page, ParserBase, gen_fingerprint
+from common import fetch_page, Storage, ParserBase, gen_fingerprint
 
 
 class WangDaiZhiJiaParser(ParserBase):
+
     def __init__(self, config):
         ParserBase.__init__(self, config)
 
@@ -41,7 +42,7 @@ class WangDaiZhiJiaParser(ParserBase):
                     'fingerprint': this_fingerprint,
                     'created_time': pq_qa.children('td').eq(2).text()
                 }
-                self.all_fingerprint[this_fingerprint] = self.all_fingerprint.get(this_fingerprint, 0) + 1
+                self.all_fingerprint[this_fingerprint] = 1
                 print one_result
                 result.append(one_result)
 
@@ -55,3 +56,7 @@ class WangDaiZhiJiaParser(ParserBase):
                     print self.url_list
 
         return result
+
+    def run(self):
+        result = self.__parse()
+        Storage.add(result)
