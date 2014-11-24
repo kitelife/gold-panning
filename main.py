@@ -26,6 +26,16 @@ CONFIGS = [
         'name': u'积木盒子 - 理财心得 - 投资心得',
         'url': 'http://bbs.jimubox.com/thread-12?type=22&orderby=postdate',
         'parser': JiMuBoxParser,
+    },
+    {
+        'name': u'积木盒子 - 理财心得 - 金融观察',
+        'url': 'http://bbs.jimubox.com/thread-12?type=24&orderby=postdate',
+        'parser': JiMuBoxParser,
+    },
+    {
+        'name': u'积木盒子 - 理财心得 - 理财指南',
+        'url': 'http://bbs.jimubox.com/thread-12?type=27&orderby=postdate',
+        'parser': JiMuBoxParser,
     }
 ]
 
