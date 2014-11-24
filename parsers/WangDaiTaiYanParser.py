@@ -48,6 +48,7 @@ class WangDaiTianYanParser(ParserBase):
                 print one_result
 
             if self.has_duplicate:
+                print self.config['name'], 'finished!'
                 break
             # 取下一页的地址
             if last_page_num == -1:

@@ -47,6 +47,7 @@ class WangDaiZhiJiaParser(ParserBase):
                 result.append(one_result)
 
             if self.has_duplicate:
+                print self.config['name'], 'finished!'
                 break
             maybe_next_page = target_ele.find('.pages').find('a').filter('.n')
             for np in maybe_next_page:
