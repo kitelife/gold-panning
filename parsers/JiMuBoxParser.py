@@ -45,6 +45,9 @@ class JiMuBoxParser(ParserBase):
                 self.all_fingerprint[this_fingerprint] = 1
                 print one_result
                 result.append(one_result)
+
+            if self.has_duplicate:
+                break
             # 取下一页的地址
             next_page_a = target_father.find('div.J_page_wrap').eq(1).children('.pages').children('a.pages_next')
             if next_page_a:
