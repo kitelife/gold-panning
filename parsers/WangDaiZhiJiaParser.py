@@ -6,7 +6,7 @@ import time
 
 from pyquery import PyQuery as pq
 
-from common import fetch_page, Storage, ParserBase, gen_fingerprint
+from common import fetch_page, ParserBase, gen_fingerprint
 
 
 class WangDaiZhiJiaParser(ParserBase):
@@ -55,7 +55,3 @@ class WangDaiZhiJiaParser(ParserBase):
                     print self.url_list
 
         return result
-
-    def run(self):
-        results = self.__parse()
-        Storage.add(results)

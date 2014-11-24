@@ -57,6 +57,10 @@ class ParserBase(object):
         self.has_duplicate = False
         self.url_list = [self.config['url'], ]
 
+    def run(self):
+        result = self.__parse()
+        Storage.add(result)
+
 
 def gen_fingerprint(raw_string):
     md5_it = hashlib.md5()
