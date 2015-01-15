@@ -22,7 +22,7 @@ class Record(Base):
     created_time = Column(DateTime, nullable=False)
 
 
-engine = create_engine('mysql://root:06122553@127.0.0.1/scrape_website?charset=utf8')
+engine = create_engine('mysql://root:06122553@127.0.0.1/gold_panning?charset=utf8')
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 db_session = Session()
